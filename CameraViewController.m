@@ -167,7 +167,6 @@
     
     _session = [[AVCaptureSession alloc] init];
     [_session setSessionPreset:[CameraViewController imageQuality]];
-    [AKDebugger logMethod:METHOD_NAME logType:AKLogTypeDebug methodType:AKMethodTypeGetter customCategories:nil message:[NSString stringWithFormat:@"viewfinder = (%f, %f, %f, %f)", self.viewfinder.frame.origin.x, self.viewfinder.frame.origin.y, self.viewfinder.frame.size.width, self.viewfinder.frame.size.height]];
     [_session addInput:input];
     [_session addOutput:self.stillImageOutput];
     
@@ -718,7 +717,6 @@
         CGRect cropRect = [self.viewfinder convertRect:self.imageView.frame fromView:self.imageView.superview];
         cropRect = CGRectMake(cropRect.origin.x*scale+(image.size.width-self.viewfinder.frame.size.width*scale)*0.5f, cropRect.origin.y*scale+(image.size.height-self.viewfinder.frame.size.height*scale)*0.5f, self.imageView.frame.size.width*scale, self.imageView.frame.size.height*scale);
         image = [AKGenerics cropImage:image toFrame:cropRect];
-        [AKDebugger logMethod:METHOD_NAME logType:AKLogTypeDebug methodType:AKMethodTypeAction customCategories:@[AKD_UI] message:[NSString stringWithFormat:@"image = (%f, %f)", image.size.width, image.size.height]];
         [self didTakePhotoWithImage:image];
      }];
 }
